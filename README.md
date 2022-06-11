@@ -1,6 +1,6 @@
 # Furiko Website
 
-[![Build](https://github.com/furiko-io/website/actions/workflows/build-pages.yaml/badge.svg)](https://github.com/furiko-io/website/actions/workflows/build-pages.yaml) [![CC BY 4.0][cc-by-shield]][cc-by]
+[![Build](https://github.com/furiko-io/website/actions/workflows/build-pages.yml/badge.svg)](https://github.com/furiko-io/website/actions/workflows/build-pages.yml) [![CC BY 4.0][cc-by-shield]][cc-by]
 
 This repository contains the documentation site for <https://furiko.io>.
 
