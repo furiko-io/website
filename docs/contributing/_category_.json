@@ -1,0 +1,9 @@
+{
+  "position": 30,
+  "label": "Contributing",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index"
+  }
+}
