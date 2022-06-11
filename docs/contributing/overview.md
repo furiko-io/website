@@ -30,7 +30,7 @@ We currently don't have a user interface for Furiko. If you have experience in b
 
 You can also contribute to this very site! If you find that any documentation is lacking or unclear, or if you simply found a typo, we are more than happe to accept contributions big or small.
 
-The code for this website lives in <https://github.com/furiko-io/docs>. For more information, refer to the [Contribution Guide](https://github.com/furiko-io/docs/blob/main/CONTRIBUTING.md).
+The code for this website lives in <https://github.com/furiko-io/website>. For more information, refer to the [Contribution Guide](https://github.com/furiko-io/website/blob/main/CONTRIBUTING.md).
 
 ## Testing
 
