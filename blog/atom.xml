@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://furiko.io/blog</id>
+    <title>Furiko Blog</title>
+    <updated>2022-06-12T00:00:00.000Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://furiko.io/blog"/>
+    <subtitle>Furiko Blog</subtitle>
+    <icon>https://furiko.io/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[Welcome to Furiko!]]></title>
+        <id>welcome</id>
+        <link href="https://furiko.io/blog/welcome"/>
+        <updated>2022-06-12T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[Welcome to the brand-new Furiko website! 🎉]]></summary>
+        <content type="html"><![CDATA[<p>Welcome to the brand-new Furiko website! 🎉</p><p>The new website is powered by <a href="https://docusaurus.io/" target="_blank" rel="noopener noreferrer">Docusaurus 2</a>, which is a modern static-site generator. The old documentation site was using <a href="https://www.mkdocs.org/" target="_blank" rel="noopener noreferrer">Mkdocs</a> which has definitely seen better days. Many features such as versioning felt rather clunky to work around, and we needed additional blogging support as well.</p><p>I decided to pull the trigger to migrate the old website to Docusaurus 2, which can be found here: <a href="https://github.com/furiko-io/docs" target="_blank" rel="noopener noreferrer">https://github.com/furiko-io/docs</a></p><p>Enjoy the new documentation site! 😁</p>]]></content>
+        <author>
+            <name>Irvin Lim</name>
+            <uri>https://github.com/irvinlim</uri>
+        </author>
+    </entry>
+</feed>
