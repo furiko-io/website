@@ -10,7 +10,7 @@
   overflow: hidden;
 }
 
-[data-theme='dark'] .heroBanner {
+[data-theme="dark"] .heroBanner {
   background-color: var(--ifm-color-primary);
 }
 
@@ -27,7 +27,14 @@
 }
 
 .buttons > * {
-  margin: 0 10px;
+  margin: 10px;
+  width: auto;
+}
+
+@media screen and (max-width: 600px) {
+  .buttons {
+    flex-direction: column;
+  }
 }
 
 .indexCtasGitHubButtonWrapper {

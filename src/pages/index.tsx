@@ -1,23 +1,23 @@
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import React from 'react';
-import ThemedImage from '@theme/ThemedImage';
-import clsx from 'clsx';
-import styles from './index.module.css';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import HomepageFeatures from "@site/src/components/HomepageFeatures";
+import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import React from "react";
+import ThemedImage from "@theme/ThemedImage";
+import clsx from "clsx";
+import styles from "./index.module.css";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
-    <header className={clsx('hero', styles.heroBanner)}>
+    <header className={clsx("hero", styles.heroBanner)}>
       <div className="container">
         <ThemedImage
           alt="Furiko logo"
           sources={{
-            light: useBaseUrl('/img/color_horizontal.png'),
-            dark: useBaseUrl('/img/white_horizontal.png'),
+            light: useBaseUrl("/img/color_horizontal.png"),
+            dark: useBaseUrl("/img/white_horizontal.png"),
           }}
           width={400}
         />
@@ -25,7 +25,8 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className="button button--secondary button--lg"
-            href="https://github.com/furiko-io/furiko">
+            href="https://github.com/furiko-io/furiko"
+          >
             View on GitHub
           </Link>
           <Link className="button button--secondary button--lg" to="/docs/">
@@ -51,7 +52,8 @@ export default function Home(): JSX.Element {
   return (
     <Layout
       title="Kubernetes-native job platform"
-      description={siteConfig.tagline}>
+      description={siteConfig.tagline}
+    >
       <HomepageHeader />
       <main>
         <HomepageFeatures />
