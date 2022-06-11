@@ -14,7 +14,7 @@ Every second, the CronController iterates through all JobConfigs, checking if an
 
 The CronController uses deterministic Job name format: `<JOBCONFIG_NAME>.<UNIX_TIMESTAMP>` (e.g. `jobconfig-sample.1646586360`). This helps prevent duplicate Jobs from being started in the event of a retryable error, or if the controller was restarted in the middle of scheduling a JobConfig.
 
-The CronController is also able to detect if any schedules were missed and [back-schedule them accordingly](../../execution/jobconfig/x#back-scheduling).
+The CronController is also able to detect if any schedules were missed and [back-schedule them accordingly](../../execution/jobconfig/scheduling.mdx#back-scheduling).
 
 ## JobQueueController
 

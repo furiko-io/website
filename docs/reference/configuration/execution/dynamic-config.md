@@ -102,7 +102,7 @@ Set this to 0 to disable back-scheduling entirely. Defaults to 5.
 
 #### `maxDowntimeThresholdSeconds`
 
-Defines the maximum downtime that the controller can tolerate. If the controller was intentionally shut down for an extended period of time, we should not attempt to back-schedule jobs once it was started. For more information, see [Back-Scheduling](../../../execution/jobconfig/x#back-scheduling).
+Defines the maximum downtime that the controller can tolerate. If the controller was intentionally shut down for an extended period of time, we should not attempt to back-schedule jobs once it was started. For more information, see [Back-Scheduling](../../../execution/jobconfig/scheduling.mdx#back-scheduling).
 
 In practice, setting this to too high of a value means that jobs could be ridiculously delayed when they are better off being skipped entirely (say, sending out a end-of-week report on the following Monday instead).
 

@@ -16,4 +16,4 @@ If you used the [YAML installation method](./install.md#from-yaml), a sample `Co
 kubectl -n furiko-system edit cm execution-dynamic-config
 ```
 
-The full description of all dynamic configuration fields can be found in the [Reference](../../reference/configuration/dynamic.md).
+The full description of all dynamic configuration fields can be found in the [Reference](../reference/configuration/dynamic.md).

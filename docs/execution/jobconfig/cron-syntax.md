@@ -135,7 +135,7 @@ The following explanation is taken from the [Jenkins documentation](https://www.
 
 The CronController supports some configuring additional parser options that would apply to all JobConfigs in the cluster.
 
-For detailed configuration documentation, see [Execution Dynamic Config](../../../reference/configuration/execution/dynamic-config.md#cron-controller).
+For detailed configuration documentation, see [Execution Dynamic Config](../../reference/configuration/execution/dynamic-config.md#cron-controller).
 
 | Configuration Name         | Description                                                 | Default      |
 | -------------------------- | ----------------------------------------------------------- | ------------ |

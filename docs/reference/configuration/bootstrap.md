@@ -22,7 +22,7 @@ defaultResync: 10m
 
 ### `dynamicConfigs`
 
-Specifies how to load the [Dynamic Configuration](./overview.md#dynamic-configuration).
+Specifies how to load the [Dynamic Configuration](./index.md#dynamic-configuration).
 
 ```yaml
 # Default value differs depending the actual component.

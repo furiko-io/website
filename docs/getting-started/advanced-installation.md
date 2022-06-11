@@ -51,16 +51,16 @@ We can set up the `Deployment` for `execution-controller` and `execution-webhook
 
 #### Bootstrap Configuration
 
-Both `execution-controller` and `execution-webhook` requires [Bootstrap Configuration](../../reference/configuration/bootstrap.md) loaded from a YAML or JSON file at startup, using the [`--config`](../../reference/configuration/execution/controller-flags.md#execution-controller-flags) command-line flag. For example, this can be loaded via a `configMap` volume mount. Refer to the following configuration pages for each of the above binaries:
+Both `execution-controller` and `execution-webhook` requires [Bootstrap Configuration](../reference/configuration/bootstrap.md) loaded from a YAML or JSON file at startup, using the [`--config`](../reference/configuration/execution/controller-flags.md#execution-controller-flags) command-line flag. For example, this can be loaded via a `configMap` volume mount. Refer to the following configuration pages for each of the above binaries:
 
-- [`execution-controller` Configuration](../../reference/configuration/execution/controller-config.md)
-- [`execution-webhook` Configuration](../../reference/configuration/execution/webhook-config.md)
+- [`execution-controller` Configuration](../reference/configuration/execution/controller-config.md)
+- [`execution-webhook` Configuration](../reference/configuration/execution/webhook-config.md)
 
 #### Container Configuration
 
 Use the custom container images from the previous step if you built your own images. You can customize other configuration for the `Deployment`, including the `command`, `args` and `securityContext`. By default, images on Docker Hub are [rootless](https://rootlesscontaine.rs/) and thus `runAsNonRoot` is enabled. If using a custom Docker image you may need to disable it.
 
-The liveness and readiness probes default to the HTTP server at port 8080 for both `execution-controller` and `execution-webhook`. To customize the port and paths, refer to the [Bootstrap Configuration](../../reference/configuration/bootstrap.md#http).
+The liveness and readiness probes default to the HTTP server at port 8080 for both `execution-controller` and `execution-webhook`. To customize the port and paths, refer to the [Bootstrap Configuration](../reference/configuration/bootstrap.md#http).
 
 You can also increase or update the resource limits for the containers if needed.
 
@@ -112,10 +112,10 @@ All components, including `execution-controller` and `execution-webhook`, expose
 
 In the YAML installation method, [`kube-rbac-proxy`](https://github.com/brancz/kube-rbac-proxy) is used as a sidecar to restrict access to the `/metrics` endpoint for enhanced security. An additional `Service` is also created to expose the metrics using `ClusterIP`.
 
-More information on the setup can be found in the [bootstrap configuration](../../reference/configuration/bootstrap.md#http).
+More information on the setup can be found in the [bootstrap configuration](../reference/configuration/bootstrap.md#http).
 
 ### Customize Dynamic Configuration
 
-Furiko also offers a [dynamic configuration](../../reference/configuration/dynamic.md) mechanism to configure components without requiring a restart. This is typically loaded from a `ConfigMap`, such that any changes to the configuration can take effect immediately.
+Furiko also offers a [dynamic configuration](../reference/configuration/dynamic.md) mechanism to configure components without requiring a restart. This is typically loaded from a `ConfigMap`, such that any changes to the configuration can take effect immediately.
 
-More information can be found on the [dynamic configuration](../../reference/configuration/dynamic.md) section of the documentation.
+More information can be found on the [dynamic configuration](../reference/configuration/dynamic.md) section of the documentation.
