@@ -55,7 +55,7 @@ export default function Home(): JSX.Element {
       description={siteConfig.tagline}
     >
       <HomepageHeader />
-      <main>
+      <main className={styles.pageSection}>
         <HomepageFeatures />
       </main>
     </Layout>

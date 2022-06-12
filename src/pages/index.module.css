@@ -3,6 +3,14 @@
  * and scoped locally.
  */
 
+.pageSection {
+  border-top: 1px solid #e5e5e5;
+}
+
+[data-theme="dark"] .pageSection {
+  border-top: 1px solid transparent;
+}
+
 .heroBanner {
   padding: 4rem 0;
   text-align: center;
