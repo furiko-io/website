@@ -313,6 +313,7 @@ As such, if the output value is required to be timezone-aware, we strongly recom
 
 <details>
 <summary>Example Usage</summary>
+
 ```yaml title="Example Option Configuration"
 - type: Date
   name: fromDate

@@ -4,19 +4,22 @@ title: Introduction
 slug: /
 ---
 
+import CaptionedImage from "@site/src/components/CaptionedImage";
+
 # Furiko
 
 **Furiko** is a cloud-native, enterprise-level cron and adhoc job platform for Kubernetes.
 
-<div className="text--center">
-  <img
-    style={{ background: "white", width: 500, margin: "0 auto", padding: 30 }}
-    src="/img/color_horizontal.png"
-  />
-  <p style={{ fontStyle: "italic" }}>
-    The word "furiko" (振り子) means "pendulum" in Japanese.
-  </p>
-</div>
+<CaptionedImage
+  src={require("/img/color_horizontal.png").default}
+  imgStyle={{
+    background: "white",
+    width: 500,
+    padding: "30px 90px",
+  }}
+>
+  The word "furiko" (振り子) means "pendulum" in Japanese.
+</CaptionedImage>
 
 ## Introduction
 

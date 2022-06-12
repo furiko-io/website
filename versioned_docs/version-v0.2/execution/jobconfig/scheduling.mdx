@@ -2,6 +2,8 @@
 sidebar_position: 10
 ---
 
+import CaptionedImage from "@site/src/components/CaptionedImage";
+
 # Scheduling
 
 A JobConfig can be set to automatically create Jobs based on a [cron schedule](https://en.wikipedia.org/wiki/Cron).
@@ -85,9 +87,7 @@ The CronController supports _"back-scheduling"_ Jobs to be created even after it
 
 Given a JobConfig with a `cron.expression` of `*/5 * * * *`, the following diagram illustrates an example of what it looks like:
 
-<div class="text--center">
-  <img src={require("./img/backscheduling.png").default} />
-</div>
+<CaptionedImage src={require("./img/backscheduling.png").default} />
 
 This effectively allows the controller to **survive short periods of downtime** with little repercussions. In practice, most jobs are able to tolerate a few minutes of delay, and it would be more costly to skip the job when it should have been scheduled.
 

@@ -2,6 +2,8 @@
 sidebar_position: 20
 ---
 
+import CaptionedImage from "@site/src/components/CaptionedImage";
+
 # Adhoc Execution
 
 This page will discuss how to run once-off, or **adhoc** Job executions. An adhoc Job is one that is not scheduled automatically (e.g. from a cron schedule), but rather started explicitly (such as via user creation or external triggers).
@@ -14,12 +16,9 @@ It is recommended to use the CLI to run adhoc jobs.
 
 The easiest way to run an adhoc Job execution is to use the [`furiko` CLI tool](../../getting-started/cli.mdx):
 
-<div className="text--center">
-  <img
-    alt="Example of `furiko run` in action"
-    src={require("./img/furiko-run.png").default}
-  />
-</div>
+<CaptionedImage src={require("./img/furiko-run.png").default}>
+  Example of <code>furiko run</code> in action
+</CaptionedImage>
 
 It is recommended to use `furiko run`, which supports the following features:
 
