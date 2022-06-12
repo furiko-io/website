@@ -92,8 +92,8 @@ const config = {
             title: "Community",
             items: [
               {
-                label: "Stack Overflow",
-                href: "https://stackoverflow.com/questions/tagged/furiko",
+                label: "GitHub Discussions",
+                href: "https://github.com/furiko-io/furiko/discussions",
               },
             ],
           },
