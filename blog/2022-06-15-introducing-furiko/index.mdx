@@ -53,7 +53,7 @@ The biggest question is probably why we decided to rewrite the Job/CronJob contr
 1. We wanted to support custom cron syntaxes, such as the `H` format [found in Jenkins](https://www.jenkins.io/doc/book/pipeline/syntax/#cron-syntax). This would greatly help to load balance a large number of CronJobs in a single cluster.
 1. We wanted to automatically kill the Job if it remains pending for too long, in case the node has issues starting the container, causing the CronJob to get stuck until it is manually resolved.
 1. We needed to automatically force delete Pods if the node is down and the controller is unable to kill the Job, which may also cause the CronJob to get stuck until the node is recovered.
-1. We need to ensure that if the CronJob has currently running Jobs, it should not allow a new Job to be run.
+1. We need to ensure that if the CronJob has currently running Jobs, it should not allow a new ad-hoc Job to be run.
 1. We cannot guarantee that workloads will not be executed more than once, such as from deleting the Pod or being evicted by `kube-controller-manager`. This was especially important to prevent double-write issues, such as jobs which perform financial transactions.
 1. At the time, [CronJobControllerV2](https://github.com/kubernetes/kubernetes/pull/93370) did not yet exist, and several performance problems riddled the V1 controller. Because it did not use the informer pattern, Jobs were not scheduled timely and the controller could not scale to reconcile thousands of Jobs concurrently.
 
