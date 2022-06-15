@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[2308],{7514:function(e){e.exports=JSON.parse('{"label":"furiko","permalink":"/blog/tags/furiko","allTagsPath":"/blog/tags","count":1}')}}]);

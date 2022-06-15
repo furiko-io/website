@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebsite=self.webpackChunkwebsite||[]).push([[2535],{5641:function(e){e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"Introducing Furiko, an open-source, Kubernetes-native job platform","permalink":"/blog/introducing-furiko"},{"title":"Refurbishing the Furiko Website","permalink":"/blog/welcome"}]}')}}]);
