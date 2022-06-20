@@ -47,6 +47,10 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      colorMode: {
+        defaultMode: "dark",
+        respectPrefersColorScheme: true,
+      },
       navbar: {
         style: "primary",
         logo: {
@@ -116,6 +120,11 @@ const config = {
       prism: {
         theme: require("prism-react-renderer/themes/github"),
         darkTheme: require("prism-react-renderer/themes/dracula"),
+      },
+      algolia: {
+        appId: "C4AFL4W7PE",
+        apiKey: "5a5e9f587ee346ae35a63628d4776c6b",
+        indexName: "furiko",
       },
     }),
 };
