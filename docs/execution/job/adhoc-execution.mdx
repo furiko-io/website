@@ -25,9 +25,41 @@ It is recommended to use `furiko run`, which supports the following features:
 - Interactive prompt for [option values](../jobconfig/job-options.md) (suppress with `--use-default-options`)
 - Specify future timestamp to [start after](./start-policy.md#startafter) (with `--at`)
 
-## Creating a Job from a JobConfig
+## Using `kubectl create` or the K8s API
 
-A Job is typically created from a JobConfig, since the JobConfig controller groups together multiple Job objects and controls their lifecycle and behavior.
+Alternatively, you can use `kubectl create` to create a new Job:
+
+```shell
+$ cat my-job.yaml
+apiVersion: execution.furiko.io/v1alpha1
+kind: Job
+metadata:
+  generateName: buy-fruit-
+spec:
+  configName: buy-fruit
+  optionValues: |-
+    fruitName: apple
+
+$ kubectl create -f my-job.yaml
+job.execution.furiko.io/buy-fruit-wg5vv created
+```
+
+Or you can use the [K8s REST API](https://kubernetes.io/docs/concepts/overview/kubernetes-api/) (the following example assumes that you are running `curl` from a Pod inside of the K8s cluster):
+
+```shell
+$ curl https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}/apis/execution.furiko.io/v1alpha1/namespaces/default/jobs \
+  --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
+  --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+  -X POST \
+  -H 'Content-Type: application/json' \
+  -d '{"apiVersion":"execution.furiko.io/v1alpha1","kind":"Job","metadata":{"generateName":"buy-fruit-","namespace":"default"},"spec":{"configName":"buy-fruit","optionValues":"{\"fruitName\": \"apple\"}"}}'
+```
+
+For more information on the YAML or API request parameters, read more on the [Job API](#job-api) below.
+
+## Job API
+
+A Job is typically created from a [JobConfig](../jobconfig/index.md), grouping multiple Job objects together and controlling their lifecycles.
 
 ### `configName`
 
@@ -44,10 +76,10 @@ spec:
     username: bob
 ```
 
-The [webhook](../../development/architecture/execution-webhook.md) is responsible for transforming the Job creation request, so that all fields will be populated from the JobConfig. The end result would be the following, extremely comprehensive Job configuration. Some fields are explained below.
-
 <details>
-<summary>Example: Final Result after transforming Jobs with configName</summary>
+<summary>Example: Final result when using configName</summary>
+
+The [webhook](../../development/architecture/execution-webhook.md) is responsible for transforming the Job creation request, so that all fields will be populated from the JobConfig. The end result would be the following, extremely comprehensive Job configuration. Some fields are explained below.
 
 ```yaml
 apiVersion: execution.furiko.io/v1alpha1
@@ -178,7 +210,7 @@ Assuming the JobConfig uses `Forbid`, this effectively allows us to schedule an 
 Explicitly specifying `startPolicy.concurrencyPolicy` in a Job may be a violation of the JobConfig's intended behavior, especially if the Job sets it to `Allow` even though the JobConfig uses `Forbid`. Use this with caution.
 :::
 
-## Scheduling Adhoc Future Executions
+## Running future Jobs
 
 Jobs can also be started in the future, rather than starting immediately upon creation. You can create a Job with `startAfter` as follows:
 
@@ -196,7 +228,7 @@ spec:
 
 For more details, see [Start Policy](./start-policy.md).
 
-## Independent Jobs
+## Running independent Jobs
 
 It is also possible to run Jobs without a JobConfig. However, this is not recommended as it would disable the features mentioned above, including the ability to use `optionValues` and enforcing concurrency policies.
 
