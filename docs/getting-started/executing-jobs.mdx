@@ -103,10 +103,17 @@ example-jobconfig-1670952000   Succeeded   16s                     16s
 
 We can also [schedule a future execution](../execution/job/start-policy.md) for the JobConfig:
 
-```sh
-$ furiko run example-jobconfig --at 2022-12-14T01:30:00+08:00
-Job default/example-jobconfig-5wpnv created
-```
+import Time from "@site/src/components/Time";
+
+<code>
+  $ furiko run example-jobconfig --at <Time offset={5 * 60} truncate={5 * 60} />
+  <br />
+  Job default/example-jobconfig-5wpnv created
+</code>
+
+:::tip
+The timestamp above is dynamically generated to be at most 5 minutes in the future - copy the code block and try it out!
+:::
 
 This queues the Job to be executed at a later time:
 
@@ -135,7 +142,7 @@ Reason:   NotYetDue
 Message:  Job is queued to start no earlier than 2022-12-13 17:30:00 +0000 UTC
 ```
 
-Note that the job is scheduled to be started exactly at `01:30:00`. By right, the cron schedule should have also scheduled another Job at `01:30:00`. However, since we are using the `Forbid` [concurrency policy](../execution/jobconfig/concurrency.md), this prevents multiple concurrent Jobs from being executed at the same time. We can verify that there was indeed no other execution that started at the same time:
+In the above example, notice that the job is scheduled to be started exactly at `01:30:00`. By right, the cron schedule should have also scheduled another Job at `01:30:00`. However, since we are using the `Forbid` [concurrency policy](../execution/jobconfig/concurrency.md), this prevents multiple concurrent Jobs from being executed at the same time. We can verify that there was indeed no other execution that started at the same time:
 
 ```sh
 $ furiko list job --for=example-jobconfig
