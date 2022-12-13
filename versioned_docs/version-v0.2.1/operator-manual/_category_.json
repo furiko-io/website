@@ -1,0 +1,9 @@
+{
+  "position": 100,
+  "label": "Operator Manual",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index"
+  }
+}
