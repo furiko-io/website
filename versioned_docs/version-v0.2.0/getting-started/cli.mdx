@@ -3,8 +3,10 @@ sidebar_position: 2
 ---
 
 import CaptionedImage from "@site/src/components/CaptionedImage";
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
 
-# Using the CLI
+# Installing the CLI
 
 This guide provides details on how to install and use the Furiko CLI tool, `furiko`.
 
@@ -12,12 +14,46 @@ This guide provides details on how to install and use the Furiko CLI tool, `furi
 
 Currently, `furiko` is only released via Furiko's GitHub releases. You can install `furiko` by downloading the executable binary from [Furiko's GitHub releases page](https://github.com/furiko-io/furiko/releases) directly.
 
-1. Download the binary that matches your system's OS and architecture (e.g. `furiko_darwin_amd64`).
-2. Rename the binary to `furiko` and make it executable:
+<Tabs>
+  <TabItem value="darwin_amd64" label="macOS" default>
 
-   ```sh
-   chmod +x furiko
-   ```
+```sh
+curl https://github.com/furiko-io/furiko/releases/latest/download/furiko_darwin_amd64 -sL -O
+mv furiko_darwin_amd64 /usr/local/bin/furiko
+chmod +x /usr/local/bin/furiko
+```
+
+  </TabItem>
+  <TabItem value="darwin_arm64" label="macOS (Apple Silicon)" default>
+
+Note that M1 Macs no longer have `/usr/local/bin` by default. You may wish to substitute `/usr/local/bin` for another directory in your `$PATH`.
+
+```sh
+curl https://github.com/furiko-io/furiko/releases/latest/download/furiko_darwin_arm64 -sL -O
+mv furiko_darwin_arm64 /usr/local/bin/furiko
+chmod +x /usr/local/bin/furiko
+```
+
+  </TabItem>
+  <TabItem value="linux" label="Linux" default>
+
+```sh
+curl https://github.com/furiko-io/furiko/releases/latest/download/furiko_linux_amd64 -sL -O
+mv furiko_linux_amd64 /usr/local/bin/furiko
+chmod +x /usr/local/bin/furiko
+```
+
+  </TabItem>
+  <TabItem value="windows" label="Windows" default>
+
+```
+curl https://github.com/furiko-io/furiko/releases/latest/download/furiko_windows_amd64.exe -sL -O
+mv furiko_windows_amd64 /usr/local/bin/furiko
+chmod +x /usr/local/bin/furiko
+```
+
+  </TabItem>
+</Tabs>
 
 ## Usage Instructions
 

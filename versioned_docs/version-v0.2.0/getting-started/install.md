@@ -16,7 +16,7 @@ This guide assumes the following prerequisites:
 
 1. You have a working Kubernetes cluster.
 2. Your Kubernetes cluster has a CNI plugin installed, such as Calico.
-3. You can connect to the cluster with credentials with sufficiently high privileges to install resources. See [Advanced Installation](./advanced-installation.md) for a detailed description of the resources that need to be installed.
+3. You can connect to the cluster with credentials with sufficiently high privileges to install resources. See [Advanced Installation](../operator-manual/advanced-installation.md) for a detailed description of the resources that need to be installed.
 
 ## From YAML
 
@@ -24,10 +24,8 @@ The recommended approach to use the distributed YAML manifests on the [GitHub Re
 
 The following command installs the [**Furiko Execution**](../execution/concepts.md) component in a single line:
 
-<!-- TODO(irvinlim): We may need to synchronize the following command with the current latest stable release. -->
-
 ```sh
-kubectl apply -f https://github.com/furiko-io/furiko/releases/download/v0.2.0/furiko-execution.yaml
+kubectl apply -f https://github.com/furiko-io/furiko/releases/latest/download/furiko-execution.yaml
 ```
 
 Refer to the GitHub Releases page for a full list of available releases.
@@ -59,14 +57,8 @@ job.batch/execution-webhook-certgen   1/1           2s         9s
 
 We have just installed the `execution-controller` and `execution-webhook` Deployments. Once running the cluster can accept and reconcile Execution CRDs. More information can be found in the [Architecture](../development/architecture/index.md) section of the documentation.
 
-:::caution
-
-Furiko's container images are currently hosted on Docker Hub. You may encounter [rate limits](https://www.docker.com/increase-rate-limits/) if using a shared IP address, especially in a large organization. Refer to Docker's [official guide on rate limiting](https://docs.docker.com/docker-hub/download-rate-limit/) for more information.
-
-:::
-
 ## Manual Installation
 
 For advanced use cases, Furiko also offers manual installation methods. However, it is recommended to use the YAML method of installation and fixing any issues there, instead of performing a full manual installation below.
 
-See the guide on [Advanced Installation](./advanced-installation.md) for more details.
+See the guide on [Advanced Installation](../operator-manual/advanced-installation.md) for more details.
