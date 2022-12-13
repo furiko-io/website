@@ -16,13 +16,14 @@ kind: JobConfig
 spec:
   concurrency:
     policy: Forbid
+    maxConcurrency: 3
 ```
 
 ## Configuration Options
 
 ### `policy`
 
-The ConcurrencyPolicy defines the behavior when a single JobConfig has multiple concurrent Jobs.
+The `policy` defines the behavior when a single JobConfig has multiple concurrent Jobs.
 
 When specified in a JobConfig, this controls the behavior of automatically scheduled Jobs and when Jobs are created on an ad-hoc basis (e.g. via `kubectl create`). It is also specified as part of a Job's [`startPolicy`](../job/start-policy.md), which inherits the policy from the JobConfig, but could be overridden if so desired.
 
@@ -32,12 +33,47 @@ When specified in a JobConfig, this controls the behavior of automatically sched
 | `Forbid`  | Forbids multiple Jobs to be started concurrently, and will be dropped/rejected immediately. |
 | `Enqueue` | Places the incoming Job into a queue to be started once all other Jobs have finished.       |
 
-#### Policy Notes
+#### `Allow` Policy
 
-1. Using `Allow` could potentially quickly result in resource exhaustion of the cluster for a misconfigured `cron.expression` that runs too frequently.
-2. When using `Enqueue`, Jobs are started in order of their `creationTimestamp`.
-   - Can also be used in conjunction with [`startAfter`](../job/start-policy.md#startafter).
-3. Furiko currently does not support a maximum queue length for `Enqueue`, which could result in a huge backlog of Jobs to be started.
+The `Allow` policy means that no restriction is imposed on the number of Jobs that can be started concurrently whatsoever.
+
+:::caution
+If a single JobConfig has a misconfigured `cron.expression` that runs too frequently, this could potentially quickly exhaust all resources in the cluster.
+:::
+
+#### `Forbid` Policy
+
+The `Forbid` policy means that any incoming Jobs that exceed the [maximum concurrency](#maxconcurrency) will be dropped/rejected immediately.
+
+When scheduled automatically using a [schedule](./scheduling.mdx), if there is another ongoing Job, the newly scheduled Job will be ignored and not be created.
+
+Attempting to run an [ad-hoc Job](../job/adhoc-execution.mdx) with another ongoing Job will also result in an error:
+
+```
+cannot create job: admission webhook "validation.webhook.jobs.execution.furiko.io" denied the request: Job.execution.furiko.io "forbid-example-rglxf" is invalid: spec.startPolicy.concurrencyPolicy: Forbidden: forbid-example currently has 1 active job(s), but concurrency policy forbids exceeding maximum concurrency of 1
+```
+
+#### `Enqueue` Policy
+
+The `Enqueue` policy means that any incoming Jobs that exceed the [maximum concurrency](#maxconcurrency) will be placed into a queue to be started once all other Jobs have finished.
+
+Any jobs that are queued would be treated as `Queued`, and requires the [JobQueueController](../../development/architecture/execution-controller.md#jobqueuecontroller) to process the Job queue. Jobs will be processed in order of their `creationTimestamp` in FIFO order.
+
+When used to run an [ad-hoc Job](../job/adhoc-execution.mdx) in conjunction with [`startAfter`](../job/start-policy.md#startafter), this allows you to start a Job after a given time. If instead `Forbid` was used and there happens to be another ongoing Job at the time it was meant to be started, the Job would instead be rejected.
+
+Note that Furiko does not currently support a maximum Job queue length, which could result in a huge backlog of Jobs to be started.
+
+### `maxConcurrency`
+
+Specifying `maxConcurrency` allows you to configure the maximum number of Jobs that can be running concurrently. Defaults to `1`.
+
+The exact behavior of `maxConcurrency` depends on the `policy` used:
+
+| Policy    | Description                                                                                                                                                                               |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Forbid`  | If there are currently `maxConcurrency` jobs ongoing, incoming Jobs will be rejected.                                                                                                     |
+| `Enqueue` | If there are currently `maxConcurrency` jobs ongoing, incoming Jobs will be placed into a queue until the number of ongoing Jobs, and will only be started once other Jobs have finished. |
+| `Allow`   | Not allowed to specify `maxConcurrency`.                                                                                                                                                  |
 
 ## Recommendations
 
@@ -62,7 +98,7 @@ The following scenarios explain what happens when there is another concurrent Jo
 If the Job was created almost at the same time that the concurrent Job started, it may be possible for it to bypass the validation webhook. In this case, the [JobQueueController](../../development/architecture/execution-controller.md#jobqueuecontroller) will reject the Job with `AdmissionError` like as follows:
 
 ```
-$ kubectl describe kjob jobconfig-sample-btzqx
+$ kubectl describe furikojob jobconfig-sample-btzqx
 ...
 Events:
   Type     Reason            Age   From                Message
