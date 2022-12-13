@@ -47,6 +47,13 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [
+        {
+          name: "keywords",
+          content:
+            "furiko, kubernetes, k8s, cronjob, cron job, kubernetes cronjob, kubernetes cron, k8s cronjob, k8s cron",
+        },
+      ],
       colorMode: {
         defaultMode: "dark",
         respectPrefersColorScheme: true,

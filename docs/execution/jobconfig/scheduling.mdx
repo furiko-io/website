@@ -19,6 +19,9 @@ spec:
       expression: 0 10 * * *
       timezone: America/New_York
     disabled: false
+    constraints:
+      notBefore: "2022-01-01T00:00:00-03:00"
+      notAfter: "2023-01-01T00:00:00-03:00"
 ```
 
 ## Configuration Options
@@ -61,11 +64,11 @@ Automatic scheduling can also be disabled or suspended, by specifying `disabled:
 
 Specify any constraints that should apply to the schedule.
 
-### `schedule.notBefore`
+#### `notBefore`
 
 If specified, automatic scheduling will not take place before this timestamp. Useful to specify a JobConfig that should only start scheduling only after a certain date in the future.
 
-### `schedule.notAfter`
+#### `notAfter`
 
 If specified, automatic scheduling will not take place after this timestamp. Useful to specify a JobConfig that should stop scheduling after a certain date in the future.
 
