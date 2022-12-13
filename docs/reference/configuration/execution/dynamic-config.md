@@ -112,7 +112,10 @@ Defaults to `300` (5 minutes). It is recommended to tune this to the maximum rea
 
 The following sample shows how to configure the full dynamic configuration ConfigMap of the execution component, as well as the default configuration values for each field.
 
-```yaml title="Full Sample Configuration"
+<details>
+<summary>Full Sample Configuration</summary>
+
+```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -218,3 +221,5 @@ data:
     # beyond the maximum downtime threshold would not be back-scheduled once it is started again.
     maxDowntimeThresholdSeconds: 300
 ```
+
+</details>
