@@ -4,7 +4,7 @@ The following tutorial walks you through how to create and execute an example Jo
 
 ## Create a JobConfig
 
-First, create an example [JobConfig](../execution/jobconfig/index.md). Copy the following and save it into a local file, editing it as necessary:
+First, create an example [JobConfig](../../execution/jobconfig/index.md). Copy the following and save it into a local file, editing it as necessary:
 
 ```yaml title=example-jobconfig.yaml
 apiVersion: execution.furiko.io/v1alpha1
@@ -44,7 +44,7 @@ kubectl apply -f example-jobconfig.yaml
 
 ## Executing the Job
 
-Using the [`furiko` command-line tool](./cli.mdx), execute the Job immediately as an [ad-hoc execution](../execution/job/adhoc-execution.mdx):
+Using the [`furiko` command-line tool](../cli.mdx), execute the Job immediately as an [ad-hoc execution](../../execution/job/adhoc-execution.mdx):
 
 ```sh
 $ furiko run example-jobconfig
@@ -87,7 +87,7 @@ $ furiko enable example-jobconfig
 Successfully enabled automatic scheduling for job config default/example-jobconfig
 ```
 
-The above [cron expression](../execution/jobconfig/cron-syntax.md) is `*/5 * * * *`, which means to run every 5 minutes. Wait for a while, and you should be able to see that the Job was automatically scheduled:
+The above [cron expression](../../execution/jobconfig/cron-syntax.md) is `*/5 * * * *`, which means to run every 5 minutes. Wait for a while, and you should be able to see that the Job was automatically scheduled:
 
 ```sh
 $ furiko list job --for=example-jobconfig
@@ -97,7 +97,7 @@ example-jobconfig-1670952000   Succeeded   16s                     16s
 
 ## Scheduling future executions
 
-We can also [schedule a future execution](../execution/job/start-policy.md) for the JobConfig:
+We can also [schedule a future execution](../../execution/job/start-policy.md) for the JobConfig:
 
 import Time from "@site/src/components/Time";
 
@@ -138,7 +138,7 @@ Reason:   NotYetDue
 Message:  Job is queued to start no earlier than 2022-12-13 17:30:00 +0000 UTC
 ```
 
-In the above example, notice that the job is scheduled to be started exactly at `01:30:00`. By right, the cron schedule should have also scheduled another Job at `01:30:00`. However, since we are using the `Forbid` [concurrency policy](../execution/jobconfig/concurrency.md), this prevents multiple concurrent Jobs from being executed at the same time. We can verify that there was indeed no other execution that started at the same time:
+In the above example, notice that the job is scheduled to be started exactly at `01:30:00`. By right, the cron schedule should have also scheduled another Job at `01:30:00`. However, since we are using the `Forbid` [concurrency policy](../../execution/jobconfig/concurrency.md), this prevents multiple concurrent Jobs from being executed at the same time. We can verify that there was indeed no other execution that started at the same time:
 
 ```sh
 $ furiko list job --for=example-jobconfig
