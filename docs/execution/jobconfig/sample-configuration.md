@@ -15,12 +15,13 @@ spec:
   # Concurrency configuration.
   concurrency:
     policy: Forbid
+    maxConcurrency: 1
 
   # Schedule configuration.
   schedule:
     cron:
-      expression: '0 */15 * * * * *'
-      timezone: 'Asia/Singapore'
+      expression: "0 */15 * * * * *"
+      timezone: "Asia/Singapore"
     disabled: false
 
   # Job options.
@@ -38,7 +39,7 @@ spec:
     # Any labels and annotations will be automatically added to downstream Jobs.
     metadata:
       annotations:
-        annotations.furiko.io/job-group: 'cool-jobs'
+        annotations.furiko.io/job-group: "cool-jobs"
     spec:
       # Specifies maximum number of attempts for each task, defaults to 1.
       maxAttempts: 3
@@ -61,13 +62,13 @@ spec:
               - name: job-container
                 args:
                   - echo
-                  - 'Hello world, ${option.username}!'
+                  - "Hello world, ${option.username}!"
                 env:
                   - name: JOBCONFIG_NAME
-                    value: '${jobconfig.name}'
+                    value: "${jobconfig.name}"
                   - name: JOB_NAME
-                    value: '${job.name}'
-                image: 'alpine'
+                    value: "${job.name}"
+                image: "alpine"
                 resources:
                   limits:
                     cpu: 100m
