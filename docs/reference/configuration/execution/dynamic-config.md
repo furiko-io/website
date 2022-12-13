@@ -5,7 +5,7 @@ sidebar_label: Dynamic Config
 
 # Execution Dynamic Config
 
-This page documents the [dynamic configuration](../#dynamic-configuration) for all execution components.
+This page documents the [dynamic configuration](../../../operator-manual/configuration/dynamic.md) for all execution components.
 
 ## Configuration Options
 

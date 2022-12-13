@@ -59,4 +59,4 @@ Documentation on Furiko dynamic configuration is split on a per-component basis.
 
 The following lists the configuration documentation for each component.
 
-- [Execution Dynamic Config](./execution/dynamic-config.md)
+- [Execution Dynamic Config](../../reference/configuration/execution/dynamic-config.md)

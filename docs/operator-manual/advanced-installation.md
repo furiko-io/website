@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Advanced Installation
 
-This guide explains how to perform a full manual installation of Furiko, and also serves as a full explainer for the [recommended YAML method of installation](./install.md#from-yaml).
+This guide explains how to perform a full manual installation of Furiko, and also serves as a full explainer for the [recommended YAML method of installation](../getting-started/install.md#from-yaml).
 
 The following walkthrough assumes a sufficient understanding of various Kubernetes concepts and knowledge to administer a Kubernetes cluster. In addition, it also assumes that you have understood the [architecture](../development/architecture/index.md) of Furiko and its various components.
 
@@ -15,7 +15,7 @@ To start, first download `furiko-execution.yaml` from the relevant version on th
 There are two services that will need to be installed as part of Furiko Execution:
 
 - [`execution-controller`](../development/architecture/execution-controller.md): Responsible for managing and interacting with Execution CRDs
-- [`execution-webhooks`](../development/architecture/execution-webhook.md): Responsible for enforcing data mutation and validation of Execution CRDs
+- [`execution-webhook`](../development/architecture/execution-webhook.md): Responsible for enforcing data mutation and validation of Execution CRDs
 
 ### Create Namespace
 
@@ -41,9 +41,9 @@ Refer to the YAML for the full list of minimum required permissions.
 
 ### Build Custom Container Images (optional)
 
-This step can be skipped if you are alright with using the images released on Docker Hub.
+This step can be skipped if you are alright with using the images released on the [GitHub Container Registry](https://github.com/orgs/furiko-io/packages?ecosystem=container).
 
-If you wish to customize the container image, you can download the binaries directly from the GitHub Releases page to be bundled in your own Docker image.
+If you wish to customize the container image, you can download the binaries directly from the GitHub Releases page to be bundled in your own container image.
 
 ### Setup Deployments
 
@@ -51,16 +51,16 @@ We can set up the `Deployment` for `execution-controller` and `execution-webhook
 
 #### Bootstrap Configuration
 
-Both `execution-controller` and `execution-webhook` requires [Bootstrap Configuration](../reference/configuration/bootstrap.md) loaded from a YAML or JSON file at startup, using the [`--config`](../reference/configuration/execution/controller-flags.md#execution-controller-flags) command-line flag. For example, this can be loaded via a `configMap` volume mount. Refer to the following configuration pages for each of the above binaries:
+Both `execution-controller` and `execution-webhook` requires [Bootstrap Configuration](./configuration/bootstrap.md) loaded from a YAML or JSON file at startup, using the [`--config`](../reference/configuration/execution/controller-flags.md#execution-controller-flags) command-line flag. For example, this can be loaded via a `configMap` volume mount. Refer to the following configuration pages for each of the above binaries:
 
 - [`execution-controller` Configuration](../reference/configuration/execution/controller-config.md)
 - [`execution-webhook` Configuration](../reference/configuration/execution/webhook-config.md)
 
 #### Container Configuration
 
-Use the custom container images from the previous step if you built your own images. You can customize other configuration for the `Deployment`, including the `command`, `args` and `securityContext`. By default, images on Docker Hub are [rootless](https://rootlesscontaine.rs/) and thus `runAsNonRoot` is enabled. If using a custom Docker image you may need to disable it.
+Use the custom container images from the previous step if you built your own images. You can customize other configuration for the `Deployment`, including the `command`, `args` and `securityContext`. By default, hosted images are [rootless](https://rootlesscontaine.rs/) and thus `runAsNonRoot` is enabled. If using a custom image you may need to disable it.
 
-The liveness and readiness probes default to the HTTP server at port 8080 for both `execution-controller` and `execution-webhook`. To customize the port and paths, refer to the [Bootstrap Configuration](../reference/configuration/bootstrap.md#http).
+The liveness and readiness probes default to the HTTP server at port 8080 for both `execution-controller` and `execution-webhook`. To customize the port and paths, refer to the [Bootstrap Configuration](./configuration/bootstrap.md#http).
 
 You can also increase or update the resource limits for the containers if needed.
 
@@ -112,10 +112,10 @@ All components, including `execution-controller` and `execution-webhook`, expose
 
 In the YAML installation method, [`kube-rbac-proxy`](https://github.com/brancz/kube-rbac-proxy) is used as a sidecar to restrict access to the `/metrics` endpoint for enhanced security. An additional `Service` is also created to expose the metrics using `ClusterIP`.
 
-More information on the setup can be found in the [bootstrap configuration](../reference/configuration/bootstrap.md#http).
+More information on the setup can be found in the [bootstrap configuration](./configuration/bootstrap.md#http).
 
 ### Customize Dynamic Configuration
 
-Furiko also offers a [dynamic configuration](../reference/configuration/dynamic.md) mechanism to configure components without requiring a restart. This is typically loaded from a `ConfigMap`, such that any changes to the configuration can take effect immediately.
+Furiko also offers a [dynamic configuration](./configuration/dynamic.md) mechanism to configure components without requiring a restart. This is typically loaded from a `ConfigMap`, such that any changes to the configuration can take effect immediately.
 
-More information can be found on the [dynamic configuration](../reference/configuration/dynamic.md) section of the documentation.
+More information can be found on the [dynamic configuration](./configuration/dynamic.md) section of the documentation.
