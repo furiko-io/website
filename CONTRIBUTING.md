@@ -20,7 +20,7 @@ The website is built with [Docusaurus 2](https://docusaurus.io/), a modern stati
 
 ## Versioning
 
-We maintain [versioned docs](https://docusaurus.io/docs/versioning) that follow the releases on [furiko-io/furiko](https://github.com/furiko-io/furiko). Documentation versions should follow major + minor version (e.g. `v0.1`).
+We maintain [versioned docs](https://docusaurus.io/docs/versioning) that follow the releases on [furiko-io/furiko](https://github.com/furiko-io/furiko). Documentation versions should follow major + minor + patch (e.g. `v0.1.2`).
 
 This means that when a Furiko version is due to be released, all documentation must be written before finalizing the version in this repository. The `next` version (i.e. <https://furiko.io/docs/next/>) is reserved for the latest version of docs for ongoing feature development (before cutting a release).
 
