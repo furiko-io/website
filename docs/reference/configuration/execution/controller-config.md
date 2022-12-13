@@ -5,7 +5,7 @@ sidebar_label: Controller Config
 
 # Execution Controller Config
 
-This page contains the full [bootstrap configuration](../bootstrap.md) for ExecutionController.
+This page contains the full [bootstrap configuration](../../../operator-manual/configuration/bootstrap.md) for ExecutionController.
 
 ```yaml
 # Here we define the bootstrap config for execution-controller.

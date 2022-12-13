@@ -5,7 +5,7 @@ sidebar_label: Webhook Config
 
 # Execution Webhook Config
 
-This page contains the full [bootstrap configuration](../bootstrap.md) for ExecutionWebhook.
+This page contains the full [bootstrap configuration](../../../operator-manual/configuration/bootstrap.md) for ExecutionWebhook.
 
 ```yaml
 # Here we define the bootstrap config for execution-webhook.
