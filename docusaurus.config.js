@@ -77,10 +77,6 @@ const config = {
             position: "left",
           },
           {
-            type: "docsVersionDropdown",
-            position: "right",
-          },
-          {
             href: "https://github.com/furiko-io/furiko",
             label: "GitHub",
             position: "right",
