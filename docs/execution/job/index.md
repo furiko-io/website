@@ -20,7 +20,7 @@ A Job can be created and started automatically by the JobConfig controller, but 
 
 Jobs created from a JobConfig will inherit its template, are subject to the JobConfig's concurrency policies, and can utilize the Job Options defined in the JobConfig's spec.
 
-For more details, see [Adhoc Execution](./adhoc-execution.mdx).
+For more details, see [Adhoc Execution](./adhoc-execution.md).
 
 ## Start Policy
 

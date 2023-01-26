@@ -48,7 +48,7 @@ For example, a cron schedule of `0 10 * * *` with a timezone of `Asia/Singapore`
 2. A UTC offset with minutes (e.g. `UTC-10:00`).
 3. A GMT offset with minutes (e.g. `GMT+05:30`). The meaning is the same as its UTC counterpart.
 
-If not specified, defaults to the controller's global default configuration value (via `defaultTimezone`), which defaults to `UTC`.
+If not specified, defaults to the global configuration value [`defaultTimezone`](../../reference/configuration/execution/dynamic-config.md#defaulttimezone) (by default, this is `UTC`).
 
 :::note
 
@@ -82,7 +82,7 @@ For more details, see [Concurrency](./concurrency.md).
 
 A JobConfig can also be scheduled to run once-off in the future by creating a Job with a `startPolicy`.
 
-See [Adhoc Execution](../job/adhoc-execution.mdx) and [Start Policy](../job/start-policy.md) for more details.
+See [Adhoc Execution](../job/adhoc-execution.md) and [Start Policy](../job/start-policy.md) for more details.
 
 ## Back-scheduling
 

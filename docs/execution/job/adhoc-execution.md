@@ -2,8 +2,6 @@
 sidebar_position: 20
 ---
 
-import CaptionedImage from "@site/src/components/CaptionedImage";
-
 # Adhoc Execution
 
 This page will discuss how to run once-off, or **adhoc** Job executions. An adhoc Job is one that is not scheduled automatically (e.g. from a cron schedule), but rather started explicitly (such as via user creation or external triggers).
@@ -16,38 +14,44 @@ It is recommended to use the CLI to run adhoc jobs.
 
 The easiest way to run an adhoc Job execution is to use the [`furiko` CLI tool](../../getting-started/cli.mdx):
 
-<CaptionedImage src={require("./img/furiko-run.png").default}>
-  Example of <code>furiko run</code> in action
-</CaptionedImage>
+![Using the CLI](../../getting-started/tutorials/using-the-cli/img/job-options.gif)
 
-It is recommended to use `furiko run`, which supports the following features:
+Using `furiko run` provides the following features:
 
 - Interactive prompt for [option values](../jobconfig/job-options.md) (suppress with `--use-default-options`)
 - Specify future timestamp to [start after](./start-policy.md#startafter) (with `--at`)
 
-## Using `kubectl create` or the K8s API
+## Using `kubectl create`
 
-Alternatively, you can use `kubectl create` to create a new Job:
+Alternatively, you can use `kubectl create` to create a new Job. For example:
+
+1. First, install the example "adhoc-refund-customer-payments" JobConfig.
+
+   ```shell
+   kubectl apply -f https://raw.githubusercontent.com/furiko-io/furiko/main/examples/jobconfigs/31-job-options--adhoc-refund-customer-payments.yaml
+   ```
+
+2. Now, you can run a new Job simply by specifying the `configName` and `optionValues` in the spec.
+
+   ```shell
+   kubectl create -f - <<EOF
+   apiVersion: execution.furiko.io/v1alpha1
+   kind: Job
+   metadata:
+     generateName: adhoc-refund-customer-payments-
+   spec:
+     configName: adhoc-refund-customer-payments
+     optionValues: |
+       customer_id: "125"
+   EOF
+   ```
+
+## Using the Kubernetes REST API
+
+You can also use the [Kubernetes REST API](https://kubernetes.io/docs/concepts/overview/kubernetes-api/) to create a new Job. The following example assumes that you are running `curl` from a Pod inside of the K8s cluster:
 
 ```shell
-$ cat my-job.yaml
-apiVersion: execution.furiko.io/v1alpha1
-kind: Job
-metadata:
-  generateName: buy-fruit-
-spec:
-  configName: buy-fruit
-  optionValues: |-
-    fruitName: apple
-
-$ kubectl create -f my-job.yaml
-job.execution.furiko.io/buy-fruit-wg5vv created
-```
-
-Or you can use the [K8s REST API](https://kubernetes.io/docs/concepts/overview/kubernetes-api/) (the following example assumes that you are running `curl` from a Pod inside of the K8s cluster):
-
-```shell
-$ curl https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}/apis/execution.furiko.io/v1alpha1/namespaces/default/jobs \
+curl https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT}/apis/execution.furiko.io/v1alpha1/namespaces/default/jobs \
   --cacert /var/run/secrets/kubernetes.io/serviceaccount/ca.crt \
   --header "Authorization: Bearer $(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
   -X POST \

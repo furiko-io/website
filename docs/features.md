@@ -28,7 +28,7 @@ In addition, adhoc jobs executed will be subject to the same concurrency policy 
 
 ### Scheduling Future Executions
 
-Furiko allows ad-hoc jobs to be queued for [execution at a later time](./execution/job/adhoc-execution.mdx#scheduling-adhoc-future-executions), or to start a new job execution immediately once the current job execution is finished.
+Furiko allows ad-hoc jobs to be queued for [execution at a later time](./execution/job/adhoc-execution.md#scheduling-adhoc-future-executions), or to start a new job execution immediately once the current job execution is finished.
 
 ### Preventing Missed and Double Executions
 
@@ -75,9 +75,9 @@ The following is a short comparison between Furiko and `batch/v1` [Jobs](https:/
 | [Cron timezone](./execution/jobconfig/scheduling.mdx#crontimezone)                               | :white_check_mark:             | :grey_question:<br />([not officially supported](https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/)) |
 | [Scheduling constraints](./execution/jobconfig/scheduling.mdx#constraints)                       | :white_check_mark:             | :x:                                                                                                                     |
 | [Cron load balancing](./execution/jobconfig/cron-syntax.md#hash-based-load-balancing)            | :white_check_mark:             | :x:                                                                                                                     |
-| [Forbid concurrent with adhoc execution](./execution/job/adhoc-execution.mdx#concurrency)        | :white_check_mark:             | :x:                                                                                                                     |
+| [Forbid concurrent with adhoc execution](./execution/job/adhoc-execution.md#concurrency)        | :white_check_mark:             | :x:                                                                                                                     |
 | [Back-scheduling](./execution/jobconfig/scheduling.mdx#back-scheduling)                          | :white_check_mark:             | :white_check_mark:<br />(via `startingDeadlineSeconds`)                                                                 |
-| [Enqueue jobs for later](./execution/job/adhoc-execution.mdx#scheduling-adhoc-future-executions) | :white_check_mark:             | :x:                                                                                                                     |
+| [Enqueue jobs for later](./execution/job/adhoc-execution.md#scheduling-adhoc-future-executions) | :white_check_mark:             | :x:                                                                                                                     |
 | **Task Execution**                                                                               |                                |                                                                                                                         |
 | [Retries using separate Pods](./execution/job/timeout-retries.md#retries)                        | :white_check_mark:             | :x:                                                                                                                     |
 | [Pending timeouts for dead nodes](./execution/job/timeout-retries.md#pendingtimeoutseconds)      | :white_check_mark:             | :x:                                                                                                                     |

@@ -1,6 +1,6 @@
 # Using the CLI
 
-This guide provides some example usage for the [CLI tool, `furiko`](../cli.mdx).
+This guide provides some example usage for the [CLI tool, `furiko`](../../cli.mdx).
 
 ## Namespaces
 
@@ -28,4 +28,4 @@ The following example shows how a JobConfig may be executed using the `furiko ru
 
 ![Run JobConfig](./img/job-options.gif)
 
-To learn more about how Job Options works, refer to the main guide [here](../../execution/jobconfig/job-options.md).
+To learn more about how Job Options works, refer to the main guide [here](../../../execution/jobconfig/job-options.md).

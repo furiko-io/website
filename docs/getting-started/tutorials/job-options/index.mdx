@@ -1,0 +1,123 @@
+# Parameterization Using Job Options
+
+The following tutorial walks you through how to parameterize a JobConfig using [Job Options](../../../execution/jobconfig/job-options.md).
+
+## Example: Refunding customer payments
+
+In this tutorial, we will use a simple example scenario to run a Job to execute some payment refunds to our customers.
+
+Since this is a toy example, the JobConfig doesn't actually perform any financial transactions, but it will serve as a good example to illustrate how Job Options can be used.
+
+### Create the JobConfig
+
+Install the [example JobConfig](https://github.com/furiko-io/furiko/blob/main/examples/jobconfigs/31-job-options--adhoc-refund-customer-payments.yaml) from GitHub in a single one-liner:
+
+```shell
+kubectl create -f https://raw.githubusercontent.com/furiko-io/furiko/main/examples/jobconfigs/31-job-options--adhoc-refund-customer-payments.yaml
+```
+
+This will install a JobConfig named `adhoc-refund-customer-payments` to the cluster.
+
+### Understanding the `option` configuration
+
+If you installed the above example JobConfig, you can inspect the JobConfig to see that there are 3 options defined:
+
+```yaml
+spec:
+  option:
+    options:
+      - name: customer_id
+        type: String
+        required: true
+
+      - name: refund_type
+        type: Select
+        required: true
+        select:
+          default: "immediate"
+          values:
+            - immediate
+            - best-effort
+
+      - name: dry_run
+        type: Bool
+        bool:
+          default: false
+          format: Custom
+          trueVal: "y"
+          falseVal: "n"
+```
+
+Each of these options have their own unique `name`, which corresponds to a unique key for substitution in the task template.
+
+In our above example scenario, this corresponds to three different parameters:
+
+1. **Customer ID**: Specifies the unique ID of the customer that we want to execute a refund for.
+2. **Refund Type**: Specifies whether this is an immediate or best-effort refund. An _immediate_ refund will be blocking, and may take several seconds or minutes to complete. On the other hand, a _best-effort_ refund will be asynchronous, and we will simply add the refund request to a queue to be processed separately.
+3. **Dry Run**: Specifies whether this is a dry-run, which allows the user to simulate running the job without actually performing any financial transactions.
+
+As such, we can see that a single Job will process a single customer at a time, and the refund type will determine whether this Job will be blocking and take several minutes, or terminate almost immediately.
+
+:::info
+In the case of sensitive transactions (such as this example), it may be wise to prevent multiple Jobs from executing at the same time for this JobConfig. As such, the `Forbid` [concurrency policy](../../../execution/jobconfig/concurrency.md) is used to ensure that payments do not have race conditions resulting in unnecessary financial losses.
+:::
+
+### Understanding the `taskTemplate`
+
+When a Job is scheduled or executed on an ad-hoc basis, the [context variables](../../../execution/jobconfig/context-variables.md) in the `taskTemplate` will be substituted with the final rendered option values.
+
+If you installed the above example JobConfig, you can inspect the JobConfig's `taskTemplate` field:
+
+```yaml
+taskTemplate:
+  pod:
+    spec:
+      containers:
+        - name: container
+          image: bash
+          command:
+            - bash
+            - "-c"
+            - |
+              # Display what we are about to do.
+              echo "[*] Will refund for customer '${option.customer_id}' using ${option.refund_type} refund method."
+
+              # Exit if only dry run.
+              if [[ "${option.dry_run}" == "y" ]]; then
+                echo "[!] Dry run mode specified, exiting."
+                exit 0
+              fi
+
+              # Simulates some actual work to be done.
+              case "${option.refund_type}" in
+                immediate)
+                  echo "[*] Processing immediate refund for customer '${option.customer_id}' now..."
+                  sleep 10
+                  echo "[!] Succesfully processed refund."
+                  ;;
+
+                best-effort)
+                  sleep 1
+                  echo "[!] Successfully enqueued best-effort refund for customer '${option.customer_id}', it will be processed within 3 business days."
+                  ;;
+              esac
+
+              echo "[*] Refund process complete."
+```
+
+The above `taskTemplate` is just an example to simulate the sequence of events in a real job that processes payment refunds. From this, we can see that:
+
+1. All job options can be substituted safely, even inside of a shell script.
+2. Job option substitutions can take place even in other fields, and is not limited to `command` like above.
+
+### Executing an ad-hoc job
+
+To execute the ad-hoc job, run the following:
+
+```shell
+furiko run adhoc-refund-customer-payments
+```
+
+The job options will be prompted via an interactive shell, auto-filling any default values as necessary:
+
+![](./img/01-job-options-run.gif)
