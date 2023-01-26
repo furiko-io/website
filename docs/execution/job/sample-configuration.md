@@ -8,7 +8,7 @@ This page contains sample configurations for creating a Job.
 
 ## From JobConfig
 
-Most of the time, you should be creating Jobs from a JobConfig as follows, as described in [Adhoc Execution](./adhoc-execution.mdx).
+Most of the time, you should be creating Jobs from a JobConfig as follows, as described in [Adhoc Execution](./adhoc-execution.md).
 
 ```yaml
 apiVersion: execution.furiko.io/v1alpha1
@@ -37,7 +37,7 @@ spec:
 
 ## Standalone Job
 
-You can also create a Job independent of a JobConfig, as described [here](./adhoc-execution.mdx#independent-jobs). You must specify the `template` yourself.
+You can also create a Job independent of a JobConfig, as described [here](./adhoc-execution.md#independent-jobs). You must specify the `template` yourself.
 
 ```yaml
 apiVersion: execution.furiko.io/v1alpha1

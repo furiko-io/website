@@ -23,8 +23,9 @@ The equivalent feature in Kubernetes is [Indexed Jobs](https://kubernetes.io/blo
 
 <Tabs>
   <TabItem value="withCount" label="With Count" default>
-    <pre>
-      {`apiVersion: execution.furiko.io/v1alpha1
+
+```yaml
+apiVersion: execution.furiko.io/v1alpha1
 kind: Job
 spec:
   parallelism:
@@ -38,13 +39,14 @@ spec:
             - name: job-container
               image: my-image
               args:
-                - ./bin/consume -shard-index=\${task.index_num}
-`}
-    </pre>
+                - ./bin/consume -shard-index=${task.index_num}
+```
+
   </TabItem>
   <TabItem value="withKeys" label="With Keys">
-    <pre>
-      {`apiVersion: execution.furiko.io/v1alpha1
+
+```yaml
+apiVersion: execution.furiko.io/v1alpha1
 kind: Job
 spec:
   parallelism:
@@ -61,13 +63,14 @@ spec:
             - name: job-container
               image: my-image
               args:
-                - ./bin/run -lang=\${task.index_key}
-`}
-    </pre>
+                - ./bin/run -lang=${task.index_key}
+```
+
   </TabItem>
   <TabItem value="withMatrix" label="With Matrix">
-    <pre>
-      {`apiVersion: execution.furiko.io/v1alpha1
+
+```yaml
+apiVersion: execution.furiko.io/v1alpha1
 kind: Job
 spec:
   parallelism:
@@ -88,12 +91,13 @@ spec:
               image: my-image
               env:
                 - name: GOOS
-                  value: \${task.index_matrix.goos}
+                  value: ${task.index_matrix.goos}
                 - name: GOARCH
-                  value: \${task.index_matrix.goarch}
+                  value: ${task.index_matrix.goarch}
               args:
-                - go build ./...`}
-    </pre>
+                - go build ./...
+```
+
   </TabItem>
 </Tabs>
 

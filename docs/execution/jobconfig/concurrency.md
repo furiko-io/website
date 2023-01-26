@@ -47,7 +47,7 @@ The `Forbid` policy means that any incoming Jobs that exceed the [maximum concur
 
 When scheduled automatically using a [schedule](./scheduling.mdx), if there is another ongoing Job, the newly scheduled Job will be ignored and not be created.
 
-Attempting to run an [ad-hoc Job](../job/adhoc-execution.mdx) with another ongoing Job will also result in an error:
+Attempting to run an [ad-hoc Job](../job/adhoc-execution.md) with another ongoing Job will also result in an error:
 
 ```
 cannot create job: admission webhook "validation.webhook.jobs.execution.furiko.io" denied the request: Job.execution.furiko.io "forbid-example-rglxf" is invalid: spec.startPolicy.concurrencyPolicy: Forbidden: forbid-example currently has 1 active job(s), but concurrency policy forbids exceeding maximum concurrency of 1
@@ -59,7 +59,7 @@ The `Enqueue` policy means that any incoming Jobs that exceed the [maximum concu
 
 Any jobs that are queued would be treated as `Queued`, and requires the [JobQueueController](../../development/architecture/execution-controller.md#jobqueuecontroller) to process the Job queue. Jobs will be processed in order of their `creationTimestamp` in FIFO order.
 
-When used to run an [ad-hoc Job](../job/adhoc-execution.mdx) in conjunction with [`startAfter`](../job/start-policy.md#startafter), this allows you to start a Job after a given time. If instead `Forbid` was used and there happens to be another ongoing Job at the time it was meant to be started, the Job would instead be rejected.
+When used to run an [ad-hoc Job](../job/adhoc-execution.md) in conjunction with [`startAfter`](../job/start-policy.md#startafter), this allows you to start a Job after a given time. If instead `Forbid` was used and there happens to be another ongoing Job at the time it was meant to be started, the Job would instead be rejected.
 
 Note that Furiko does not currently support a maximum Job queue length, which could result in a huge backlog of Jobs to be started.
 

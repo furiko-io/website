@@ -45,7 +45,7 @@ spec:
         - "Hello world, ${option.username}!"
 ```
 
-To pass option value inputs into the JobConfig, you can do so with [`optionValues`](../job/adhoc-execution.mdx#optionvalues):
+To pass option value inputs into the JobConfig, you can do so with [`optionValues`](../job/adhoc-execution.md#optionvalues):
 
 ```yaml title="Example JobSpec"
 apiVersion: execution.furiko.io/v1alpha1
